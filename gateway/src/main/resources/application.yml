@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: gateway
+
+zuul:
+  routes:
+    book-service: /books/**
+    account-service: /accounts/**
+
+server:
+  port: 8080
