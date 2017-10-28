@@ -33,13 +33,13 @@ public class AccountApplication {
         accounts.add(new Account(7, 2, "777777"));
     }
 
-    @RequestMapping("/accounts/{number}")
+    @RequestMapping("/{number}")
     public Account findByNumber(@PathVariable("number") String number) {
         logger.info(String.format("Account.findByNumber(%s)", number));
         return accounts.stream().filter(it -> it.getNumber().equals(number)).findFirst().get();
     }
 
-    @RequestMapping("/accounts/customer/{customer}")
+    @RequestMapping("/customer/{customer}")
     public List<Account> findByCustomer(@PathVariable("customer") Integer customerId) {
         logger.info(String.format("Account.findByCustomer(%s)", customerId));
         return accounts.stream().filter(it -> it.getCustomerId().intValue() == customerId.intValue()).collect(Collectors.toList());
