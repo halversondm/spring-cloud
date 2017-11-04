@@ -2,3 +2,9 @@
 target/
 node_modules/
 *.iml
+
+tomcat01/
+tomcat02/
+env/
+
+logs/

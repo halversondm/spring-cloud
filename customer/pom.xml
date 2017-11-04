@@ -2,21 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>account</artifactId>
-    <version>1.0.0</version>
-    <packaging>${project.packaging}</packaging>
-
     <parent>
-        <groupId>com.halversondm</groupId>
         <artifactId>spring-cloud</artifactId>
+        <groupId>com.halversondm</groupId>
         <version>1.0.0</version>
     </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>customer</artifactId>
+    <packaging>${project.packaging}</packaging>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -68,12 +70,12 @@
                 </dependency>
             </dependencies>
             <build>
-                <finalName>account</finalName>
+                <finalName>customer</finalName>
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>
                         <excludes>
-                            <exclude>application-account.yml</exclude>
+                            <exclude>application-customer.yml</exclude>
                         </excludes>
                     </resource>
                 </resources>

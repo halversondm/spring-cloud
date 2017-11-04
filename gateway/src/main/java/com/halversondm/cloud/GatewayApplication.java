@@ -1,6 +1,6 @@
-package hello;
+package com.halversondm.cloud;
 
-import hello.filters.pre.SimpleFilter;
+import com.halversondm.cloud.filters.pre.SimpleFilter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -16,8 +16,9 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
-//    @Bean
-//    public SimpleFilter simpleFilter() {
-//        return new SimpleFilter();
-//    }
+    @Bean
+    public SimpleFilter simpleFilter() {
+        return new SimpleFilter();
+    }
+
 }

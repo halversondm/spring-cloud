@@ -1,4 +1,4 @@
-package hello.filters.pre;
+package com.halversondm.cloud.filters.pre;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
