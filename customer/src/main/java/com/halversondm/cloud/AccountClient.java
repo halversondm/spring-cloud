@@ -14,6 +14,6 @@ public interface AccountClient {
     For deploy to a single Tomcat this would require to have the value updated to include the context root.
      */
 
-    @RequestMapping(method = RequestMethod.GET, value = "/accounts/customer/{customerId}")
+    @RequestMapping(method = RequestMethod.GET, value = "${accountContextRoot}/accounts/customer/{customerId}")
     List<Account> getAccounts(@PathVariable("customerId") Integer customerId);
 }

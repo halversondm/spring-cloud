@@ -1,6 +1,8 @@
 server:
   port: 8092
 
+accountContextRoot: ""
+
 eureka:
   client:
     serviceUrl:
