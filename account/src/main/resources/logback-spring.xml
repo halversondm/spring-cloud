@@ -7,7 +7,7 @@
 
     <springProfile name="!dev">
         <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-        <property name="LOG_FILE" value="logs/account.log"/>
+        <property name="LOG_FILE" value="${CATALINA_BASE:-}/logs/account-service.log"/>
         <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
         <root level="INFO">
             <appender-ref ref="FILE" />

@@ -1,0 +1,17 @@
+spring:
+  jmx:
+    enabled: false
+
+accountContextRoot: account-service
+
+server:
+  hostname: 192.168.0.13
+  port: 8082
+
+eureka:
+  instance:
+    statusPageUrlPath: /${spring.application.name}/info
+    healthCheckUrlPath: /${spring.application.name}/health
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.46:8082/registry/eureka/
