@@ -72,7 +72,6 @@
                 </dependency>
             </dependencies>
             <build>
-                <finalName>account-service</finalName>
                 <resources>
                     <resource>
                         <directory>src/main/resources</directory>

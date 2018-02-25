@@ -38,5 +38,6 @@
         <module>registry</module>
         <module>account</module>
         <module>customer</module>
+        <module>docker</module>
     </modules>
 </project>
