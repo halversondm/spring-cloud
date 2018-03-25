@@ -6,3 +6,5 @@ jdk:
   - oraclejdk8
 install:
   - mvn install -P war
+notifications:
+  slack: $SLACK_TOKEN
