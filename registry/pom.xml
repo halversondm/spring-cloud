@@ -5,17 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>registry</artifactId>
     <version>1.0.0</version>
-    <packaging>${project.packaging}</packaging>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>com.halversondm</groupId>
         <artifactId>spring-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
-
-    <properties>
-        <project.packaging>jar</project.packaging>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -39,43 +35,29 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.7</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <!-- <goal>push</goal> -->
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>halversondm/spring-cloud-registry</repository>
+                    <tag>latest</tag>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        <PORT>9004</PORT>
+                    </buildArgs>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>war</id>
-            <properties>
-                <project.packaging>war</project.packaging>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <artifactId>spring-boot-starter-tomcat</artifactId>
-                            <groupId>org.springframework.boot</groupId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>javax.servlet-api</artifactId>
-                    <version>3.1.0</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <excludes>
-                            <exclude>application-registry.yml</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
 </project>

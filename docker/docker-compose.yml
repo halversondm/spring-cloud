@@ -1,0 +1,88 @@
+version: '2.2'
+services:
+  eureka-server:
+    container_name: eureka-server
+    image: halversondm/spring-cloud-registry:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: container
+    expose:
+    - 9004
+    ports:
+    - 9004:9004
+    networks:
+    - emp-network
+  account-service:
+    container_name: account-service
+    image: halversondm/spring-cloud-account:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: container
+    command: sh -c '/opt/bin/wait-for.sh eureka-server:9004 -t 10000 -- java -jar /opt/lib/service.jar'
+    expose:
+    - 9000
+    ports:
+    - 9000:9000
+    networks:
+    - emp-network
+    links:
+    - eureka-server:eureka-server
+    depends_on:
+    - eureka-server
+    logging:
+      driver: json-file
+  book-service:
+    container_name: book-service
+    image: halversondm/spring-cloud-book:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: container
+    command: sh -c '/opt/bin/wait-for.sh eureka-server:9004 -t 10000 -- java -jar /opt/lib/service.jar'
+    expose:
+    - 9001
+    ports:
+    - 9001:9001
+    networks:
+    - emp-network
+    links:
+    - eureka-server:eureka-server
+    depends_on:
+    - eureka-server
+    logging:
+      driver: json-file
+  customer-service:
+    container_name: customer-service
+    image: halversondm/spring-cloud-customer:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: container
+    command: sh -c '/opt/bin/wait-for.sh eureka-server:9004 -t 10000 -- java -jar /opt/lib/service.jar'
+    expose:
+    - 9002
+    ports:
+    - 9002:9002
+    networks:
+    - emp-network
+    links:
+    - eureka-server:eureka-server
+    depends_on:
+    - eureka-server
+    logging:
+      driver: json-file
+  gateway-service:
+    container_name: gateway-service
+    image: halversondm/spring-cloud-gateway:latest
+    environment:
+      SPRING_PROFILES_ACTIVE: container
+    command: sh -c '/opt/bin/wait-for.sh eureka-server:9004 -t 10000 -- java -jar /opt/lib/service.jar'
+    expose:
+    - 9003
+    ports:
+    - 9003:9003
+    networks:
+    - emp-network
+    links:
+    - eureka-server:eureka-server
+    depends_on:
+    - eureka-server
+    logging:
+      driver: json-file
+networks:
+  emp-network:
+    driver: bridge

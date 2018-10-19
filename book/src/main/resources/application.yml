@@ -3,9 +3,18 @@ spring:
     name: book-service
 
 server:
-  port: 8090
+  port: 9001
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:9004/eureka/
+
+---
+spring:
+  profiles: container
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:9004/eureka/
