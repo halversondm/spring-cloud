@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -28,21 +29,21 @@ public class AccountController {
         accounts.add(new Account(7, 2, "777777"));
     }
 
-    @RequestMapping("/accounts/{number}")
-    public Account findByNumber(@PathVariable("number") String number) {
-        logger.info(String.format("Account.findByNumber(%s)", number));
-        return accounts.stream().filter(it -> it.getNumber().equals(number)).findFirst().get();
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET, produces = "application/json")
+    public Account findByAccountId(@PathVariable("accountId") String accountId) {
+        logger.info(String.format("Account.findByNumber(%s)", accountId));
+        return accounts.stream().filter(it -> it.getNumber().equals(accountId)).findFirst().get();
     }
 
-    @RequestMapping("/accounts/customer/{customer}")
-    public List<Account> findByCustomer(@PathVariable("customer") Integer customerId) {
+    @RequestMapping(value ="/accounts/customer/{customerId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Account> findByCustomerId(@PathVariable("customerId") Integer customerId) {
         logger.info(String.format("Account.findByCustomer(%s)", customerId));
         return accounts.stream().filter(it -> it.getCustomerId().intValue() == customerId.intValue()).collect(Collectors.toList());
     }
 
-    @RequestMapping("/accounts")
-    public List<Account> findAll() {
-        logger.info("Account.findAll()");
+    @RequestMapping(value = "/accounts", method = RequestMethod.GET, produces = "application/json")
+    public List<Account> findAllAccounts() {
+        logger.info("Account.findAllAccounts()");
         return accounts;
     }
 }

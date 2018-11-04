@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -29,24 +30,18 @@ public class CustomerController {
     }
 
 
-    @RequestMapping("/customers/pesel/{pesel}")
-    public Customer findByPesel(@PathVariable("pesel") String pesel) {
-        logger.info(String.format("Customer.findByPesel(%s)", pesel));
-        return customers.stream().filter(it -> it.getCustomerId().equals(pesel)).findFirst().get();
+    @RequestMapping(value = "/customers/{customerId}", method = RequestMethod.GET, produces = "application/json")
+    public Customer findByCustomerId(@PathVariable("customerId") String customerId) {
+        logger.info(String.format("Customer.findByCustomerId(%s)", customerId));
+        Customer customer = customers.stream().filter(it -> it.getCustomerId().equals(customerId)).findFirst().get();
+        List<Account> accounts = accountClient.getAccounts(customer.getId());
+        customer.setAccounts(accounts);
+        return customer;
     }
 
-    @RequestMapping("/customers")
+    @RequestMapping(value = "/customers", method = RequestMethod.GET, produces = "application/json")
     public List<Customer> findAll() {
         logger.info("Customer.findAll()");
         return customers;
-    }
-
-    @RequestMapping("/customers/{id}")
-    public Customer findById(@PathVariable("id") Integer id) {
-        logger.info(String.format("Customer.findById(%s)", id));
-        Customer customer = customers.stream().filter(it -> it.getId().intValue() == id.intValue()).findFirst().get();
-        List<Account> accounts = accountClient.getAccounts(id);
-        customer.setAccounts(accounts);
-        return customer;
     }
 }

@@ -50,7 +50,7 @@
                 </executions>
                 <configuration>
                     <repository>halversondm/spring-cloud-gateway</repository>
-                    <tag>latest</tag>
+                    <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                         <PORT>9003</PORT>
