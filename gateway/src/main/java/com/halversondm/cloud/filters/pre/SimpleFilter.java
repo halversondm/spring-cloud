@@ -1,3 +1,4 @@
+/*
 package com.halversondm.cloud.filters.pre;
 
 import com.netflix.zuul.ZuulFilter;
@@ -34,3 +35,4 @@ public class SimpleFilter extends ZuulFilter {
         return null;
     }
 }
+*/

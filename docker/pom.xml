@@ -7,7 +7,7 @@
         <groupId>com.halversondm</groupId>
         <artifactId>spring-cloud</artifactId>
         <version>1.0.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>docker</artifactId>
@@ -19,19 +19,16 @@
             <groupId>com.halversondm</groupId>
             <artifactId>registry</artifactId>
             <version>1.0.0</version>
-            <type>war</type>
         </dependency>
         <dependency>
             <groupId>com.halversondm</groupId>
             <artifactId>account</artifactId>
             <version>1.0.0</version>
-            <type>war</type>
         </dependency>
         <dependency>
             <groupId>com.halversondm</groupId>
             <artifactId>customer</artifactId>
             <version>1.0.0</version>
-            <type>war</type>
         </dependency>
     </dependencies>
 
@@ -53,6 +50,7 @@
                 <configuration>
                     <repository>halversondm/spring-cloud</repository>
                     <tag>${project.version}</tag>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>

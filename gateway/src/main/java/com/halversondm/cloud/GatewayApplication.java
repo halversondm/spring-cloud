@@ -1,13 +1,13 @@
 package com.halversondm.cloud;
 
-import com.halversondm.cloud.filters.pre.SimpleFilter;
+// import com.halversondm.cloud.filters.pre.SimpleFilter; // Commented out Zuul filter
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+// import org.springframework.cloud.netflix.zuul.EnableZuulProxy; // Commented out Zuul annotation
 import org.springframework.context.annotation.Bean;
 
-@EnableZuulProxy
+// @EnableZuulProxy // Commented out Zuul annotation
 @EnableDiscoveryClient
 @SpringBootApplication
 public class GatewayApplication {
@@ -16,9 +16,9 @@ public class GatewayApplication {
         SpringApplication.run(GatewayApplication.class, args);
     }
 
-    @Bean
-    public SimpleFilter simpleFilter() {
-        return new SimpleFilter();
-    }
+    // @Bean // Commented out Zuul filter bean
+    // public SimpleFilter simpleFilter() {
+    //     return new SimpleFilter();
+    // }
 
 }
