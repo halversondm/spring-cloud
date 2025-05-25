@@ -17,11 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>com.halversondm</groupId>
-            <artifactId>registry</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.halversondm</groupId>
             <artifactId>account</artifactId>
             <version>1.0.0</version>
         </dependency>
