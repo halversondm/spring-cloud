@@ -17,10 +17,10 @@ public class CustomerController {
 
     private List<Customer> customers;
 
-    @Autowired
-    private AccountClient accountClient;
+    AccountClient accountClient;
 
-    public CustomerController() {
+    public CustomerController(AccountClient accountClient) {
+        this.accountClient = accountClient;
         customers = new ArrayList<>();
         customers.add(new Customer(1, "12345", "Steve Sanders", CustomerType.INDIVIDUAL));
         customers.add(new Customer(2, "12346", "Monica Lewinsky", CustomerType.INDIVIDUAL));

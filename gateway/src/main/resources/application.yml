@@ -15,28 +15,5 @@ management:
     health:
       show-details: always # Or when_authorized if security is configured
 
-#zuul:
-#  routes:
-#    book:
-#      path: /book/**
-#      serviceId: book-service
-#    account:
-#      path: /account/**
-#      serviceId: account-service
-#    customer:
-#      path: /customer/**
-#      serviceId: customer-service
-#  prefix: /api
-
-#ribbon:
-#  eureka:
-#    enabled: true
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    registerWithEureka: false
-
 server:
   port: 8080
