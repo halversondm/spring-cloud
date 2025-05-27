@@ -42,5 +42,6 @@
         <module>gateway</module>
         <module>account</module>
         <module>customer</module>
+        <module>liquibase</module>
     </modules>
 </project>
