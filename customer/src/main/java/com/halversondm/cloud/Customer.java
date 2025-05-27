@@ -1,12 +1,22 @@
 package com.halversondm.cloud;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+import lombok.Data;
+
 import java.util.List;
 
+@Entity
+@Data
 public class Customer {
+
+    @Id
     private Integer id;
     private String customerId;
     private String name;
     private CustomerType type;
+    @Transient
     private List<Account> accounts;
 
     public Customer() {
@@ -20,43 +30,4 @@ public class Customer {
         this.type = type;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public CustomerType getType() {
-        return type;
-    }
-
-    public void setType(CustomerType type) {
-        this.type = type;
-    }
-
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
 }

@@ -22,7 +22,7 @@ services:
   book:
     build: ./book
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/appdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/appdb?currentSchema=spring_cloud_app
       SPRING_DATASOURCE_USERNAME: appuser
       SPRING_DATASOURCE_PASSWORD: apppass
     depends_on:
@@ -30,19 +30,17 @@ services:
 
   gateway:
     build: ./gateway
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/appdb
-      SPRING_DATASOURCE_USERNAME: appuser
-      SPRING_DATASOURCE_PASSWORD: apppass
     depends_on:
-      - postgres
+      - book
+      - customer
+      - account
     ports:
       - "8082:8080"
 
   account:
     build: ./account
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/appdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/appdb?currentSchema=spring_cloud_app
       SPRING_DATASOURCE_USERNAME: appuser
       SPRING_DATASOURCE_PASSWORD: apppass
     depends_on:
@@ -51,7 +49,7 @@ services:
   customer:
     build: ./customer
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/appdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/appdb?currentSchema=spring_cloud_app
       SPRING_DATASOURCE_USERNAME: appuser
       SPRING_DATASOURCE_PASSWORD: apppass
     depends_on:

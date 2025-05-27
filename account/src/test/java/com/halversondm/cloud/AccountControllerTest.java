@@ -3,24 +3,42 @@ package com.halversondm.cloud;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.http.MediaType;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 class AccountControllerTest {
 
     private MockMvc mockMvc;
+    private AccountDao accountDao;
+
+    List<Account> accounts;
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(new AccountController()).build();
+        accounts = new ArrayList<>();
+        accounts.add(new Account(1, 1, "111111"));
+        accounts.add(new Account(2, 2, "222222"));
+        accounts.add(new Account(3, 3, "333333"));
+        accounts.add(new Account(4, 4, "444444"));
+        accounts.add(new Account(5, 1, "555555"));
+        accounts.add(new Account(6, 2, "666666"));
+        accounts.add(new Account(7, 2, "777777"));
+        accountDao = Mockito.mock(AccountDao.class);
+        mockMvc = MockMvcBuilders.standaloneSetup(new AccountController(accountDao)).build();
     }
 
     @Test
     void testFindAll() throws Exception {
+        when(accountDao.findAll()).thenReturn(accounts);
         mockMvc.perform(get("/accounts"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(7));
@@ -28,6 +46,7 @@ class AccountControllerTest {
 
     @Test
     void testFindByNumber() throws Exception {
+        when(accountDao.findByNumber("111111")).thenReturn(accounts.get(0));
         mockMvc.perform(get("/accounts/111111"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.number").value("111111"));
@@ -35,6 +54,8 @@ class AccountControllerTest {
 
     @Test
     void testFindByCustomer() throws Exception {
+        when(accountDao.findByCustomerId(2)).thenReturn(
+                accounts.stream().filter(account -> account.getCustomerId() == 2).toList());
         mockMvc.perform(get("/accounts/customer/2"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3));
