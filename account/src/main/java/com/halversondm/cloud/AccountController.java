@@ -28,7 +28,7 @@ public class AccountController {
     }
 
     @RequestMapping("/accounts/customer/{customer}")
-    public List<Account> findByCustomer(@PathVariable("customer") Integer customerId) {
+    public List<Account> findByCustomer(@PathVariable("customer") String customerId) {
         logger.info(String.format("Account.findByCustomer(%s)", customerId));
         return accountDao.findByCustomerId(customerId);
     }

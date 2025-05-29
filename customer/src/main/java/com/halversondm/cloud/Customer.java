@@ -1,8 +1,6 @@
 package com.halversondm.cloud;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -15,6 +13,7 @@ public class Customer {
     private Integer id;
     private String customerId;
     private String name;
+    @Enumerated(EnumType.STRING)
     private CustomerType type;
     @Transient
     private List<Account> accounts;

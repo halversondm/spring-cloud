@@ -16,8 +16,5 @@ GET http://localhost:8082/account/accounts/111111
 ### Customer Service /customers
 GET http://localhost:8082/customer/customers
 
-### Customer Service /customers/{id}
-GET http://localhost:8082/customer/customers/1
-
 ### Customer Service /customers/pesel/
 GET http://localhost:8082/customer/customers/pesel/12345

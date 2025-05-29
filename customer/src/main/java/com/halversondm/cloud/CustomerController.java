@@ -31,7 +31,7 @@ public class CustomerController {
     public Customer findByPesel(@PathVariable("pesel") String pesel) {
         logger.info(String.format("Customer.findByPesel(%s)", pesel));
         Customer customer = customerDao.findByCustomerId(pesel);
-        List<Account> accounts = accountClient.getAccounts(customer.getId());
+        List<Account> accounts = accountClient.getAccounts(pesel);
         customer.setAccounts(accounts);
         return customer;
     }
@@ -39,7 +39,12 @@ public class CustomerController {
     @RequestMapping("/customers")
     public List<Customer> findAll() {
         logger.info("Customer.findAll()");
-        return (List<Customer>) customerDao.findAll();
+        Iterable<Customer> customers = customerDao.findAll();
+        for (Customer customer : customers) {
+            List<Account> accounts = accountClient.getAccounts(customer.getCustomerId());
+            customer.setAccounts(accounts);
+        }
+        return (List<Customer>) customers;
     }
 
 }

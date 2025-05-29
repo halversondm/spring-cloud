@@ -25,13 +25,13 @@ class AccountControllerTest {
     @BeforeEach
     void setUp() {
         accounts = new ArrayList<>();
-        accounts.add(new Account(1, 1, "111111"));
-        accounts.add(new Account(2, 2, "222222"));
-        accounts.add(new Account(3, 3, "333333"));
-        accounts.add(new Account(4, 4, "444444"));
-        accounts.add(new Account(5, 1, "555555"));
-        accounts.add(new Account(6, 2, "666666"));
-        accounts.add(new Account(7, 2, "777777"));
+        accounts.add(new Account(1, "1", "111111", 1111.11));
+        accounts.add(new Account(2, "2", "222222", 2222.22));
+        accounts.add(new Account(3, "3", "333333", 3333.33));
+        accounts.add(new Account(4, "4", "444444", 4444.44));
+        accounts.add(new Account(5, "1", "555555", 5555.55));
+        accounts.add(new Account(6, "2", "666666", 6666.66));
+        accounts.add(new Account(7, "2", "777777", 7777.77));
         accountDao = Mockito.mock(AccountDao.class);
         mockMvc = MockMvcBuilders.standaloneSetup(new AccountController(accountDao)).build();
     }
@@ -54,8 +54,8 @@ class AccountControllerTest {
 
     @Test
     void testFindByCustomer() throws Exception {
-        when(accountDao.findByCustomerId(2)).thenReturn(
-                accounts.stream().filter(account -> account.getCustomerId() == 2).toList());
+        when(accountDao.findByCustomerId("2")).thenReturn(
+                accounts.stream().filter(account -> account.getCustomerId().equals("2")).toList());
         mockMvc.perform(get("/accounts/customer/2"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(3));

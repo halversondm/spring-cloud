@@ -8,5 +8,5 @@ public interface AccountDao extends CrudRepository<Account, Long> {
 
     Account findByNumber(String number);
 
-    List<Account> findByCustomerId(Integer customerId);
+    List<Account> findByCustomerId(String customerId);
 }
