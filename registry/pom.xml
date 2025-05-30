@@ -5,17 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>registry</artifactId>
     <version>1.0.0</version>
-    <packaging>${project.packaging}</packaging>
 
     <parent>
         <groupId>com.halversondm</groupId>
         <artifactId>spring-cloud</artifactId>
         <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
-
-    <properties>
-        <project.packaging>jar</project.packaging>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -42,40 +38,4 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>war</id>
-            <properties>
-                <project.packaging>war</project.packaging>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <artifactId>spring-boot-starter-tomcat</artifactId>
-                            <groupId>org.springframework.boot</groupId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>javax.servlet-api</artifactId>
-                    <version>3.1.0</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <excludes>
-                            <exclude>application-registry.yml</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
 </project>

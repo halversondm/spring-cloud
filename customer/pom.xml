@@ -6,10 +6,10 @@
         <artifactId>spring-cloud</artifactId>
         <groupId>com.halversondm</groupId>
         <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>customer</artifactId>
-    <packaging>${project.packaging}</packaging>
 
     <dependencies>
         <dependency>
@@ -39,51 +39,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <project.packaging>jar</project.packaging>
-            </properties>
-        </profile>
-        <profile>
-            <id>war</id>
-            <properties>
-                <project.packaging>war</project.packaging>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <artifactId>spring-boot-starter-tomcat</artifactId>
-                            <groupId>org.springframework.boot</groupId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>javax.servlet-api</artifactId>
-                    <version>3.1.0</version>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <excludes>
-                            <exclude>application-customer.yml</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
 
 </project>

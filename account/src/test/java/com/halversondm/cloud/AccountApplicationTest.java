@@ -1,0 +1,13 @@
+package com.halversondm.cloud;
+
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class AccountApplicationTest {
+
+    @Test
+    public void contextLoads() {
+        // The context loads without exceptions
+    }
+}
