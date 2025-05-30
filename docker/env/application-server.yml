@@ -10,8 +10,8 @@ server:
 
 eureka:
   instance:
-    statusPageUrlPath: /${spring.application.name}/info
-    healthCheckUrlPath: /${spring.application.name}/health
+    statusPageUrlPath: /${spring.application.name}/actuator/info
+    healthCheckUrlPath: /${spring.application.name}/actuator/health
   client:
     serviceUrl:
       defaultZone: http://localhost:8080/registry/eureka/

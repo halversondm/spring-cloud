@@ -1,3 +1,23 @@
+server:
+  port: 8761
+
 spring:
   application:
     name: registry
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    # waitTimeInMsWhenSyncEmpty: 0 # Optional: for faster startup in single node dev environments
+    # renewalPercentThreshold: 0.85 # Default, consider adjusting for small clusters
+    # enableSelfPreservation: true # Default, good for production resilience
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

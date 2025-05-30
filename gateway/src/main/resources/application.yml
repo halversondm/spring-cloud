@@ -1,37 +1,58 @@
 spring:
   application:
     name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: book_route
+          uri: lb://BOOK-SERVICE # Assuming book-service is registered in Eureka
+          predicates:
+            - Path=/api/book/**
+        - id: account_route
+          uri: lb://ACCOUNT-SERVICE # Assuming account-service is registered in Eureka
+          predicates:
+            - Path=/api/account/**
+        - id: customer_route
+          uri: lb://CUSTOMER-SERVICE # Assuming customer-service is registered in Eureka
+          predicates:
+            - Path=/api/customer/**
+      # Optional: If service IDs in Eureka are lowercase or different
+      # discovery:
+      #   locator:
+      #     enabled: true # Defaults to false if you define routes manually like above
+      #     lower-case-service-id: true # If Eureka service IDs are lowercase
 
-endpoints:
-  restart:
-    enabled: true
-  shutdown:
-    enabled: true
-  health:
-    sensitive: false
-
-zuul:
-  routes:
-    book:
-      path: /book/**
-      serviceId: book-service
-    account:
-      path: /account/**
-      serviceId: account-service
-    customer:
-      path: /customer/**
-      serviceId: customer-service
-  prefix: /api
-
-ribbon:
-  eureka:
-    enabled: true
-
+# Eureka client configuration for the gateway
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+    # Gateway typically doesn't need to register itself if it's only acting as a proxy
+    # However, if other services need to discover the gateway, set to true.
+    # For this setup, keeping it false as per original config.
     registerWithEureka: false
+  # instance: # Optional: if you want to customize the gateway's own registration if registerWithEureka is true
+  #   prefer-ip-address: true
 
+# Server port for the gateway
 server:
   port: 8080
+
+# Actuator endpoints (good to have)
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" # Or list specific endpoints like health,info,gatewayroutes
+  endpoint:
+    health:
+      show-details: always # Or when-authorized
+    gateway:
+      enabled: true # To see gateway routes via actuator
+
+# Logging (example for gateway)
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    reactor.netty.http.client: DEBUG
+    com.halversondm.cloud: DEBUG

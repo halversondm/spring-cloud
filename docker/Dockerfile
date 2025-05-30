@@ -1,4 +1,4 @@
-FROM tomcat:8.5.28-jre8-alpine
+FROM tomcat:9.0-jre17-alpine
 
 WORKDIR $CATALINA_HOME/webapps
 
