@@ -1,0 +1,6 @@
+rootProject.name = 'spring-cloud'
+include 'book'
+include 'account'
+include 'customer'
+include 'gateway'
+include 'liquibase'

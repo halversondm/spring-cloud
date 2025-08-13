@@ -7,3 +7,8 @@ tomcat01/
 tomcat02/
 
 logs/
+
+build/
+gradlew
+gradlew.bat
+.gradle

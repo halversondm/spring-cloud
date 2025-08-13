@@ -1,0 +1,27 @@
+plugins {
+    id 'org.springframework.boot' version '3.4.0'
+    id 'jvm-test-suite'
+}
+
+group = 'com.halversondm'
+version = '1.0.0'
+
+description = 'liquibase for the customer, account and book domains'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.postgresql:postgresql:42.7.4'
+    testImplementation 'com.h2database:h2:2.2.224'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+   useJUnitPlatform()
+}
