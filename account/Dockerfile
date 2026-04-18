@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:21-jre-jammy
 LABEL authors="halversondm"
 
 ARG JAR_FILE=target/account-1.0.0.jar
