@@ -3,25 +3,27 @@ spring:
     name: gateway-service
   cloud:
     gateway:
-      routes:
-      - id: account-service
-        uri: http://account:8080
-        predicates:
-        - Path=/account/**
-        filters:
-        - StripPrefix=1
-      - id: customer-service
-        uri: http://customer:8080
-        predicates:
-        - Path=/customer/**
-        filters:
-        - StripPrefix=1
-      - id: book-service
-        uri: http://book:8080
-        predicates:
-          - Path=/book/**
-        filters:
-          - StripPrefix=1
+      server:
+        webflux:
+          routes:
+          - id: account-service
+            uri: http://account:8080
+            predicates:
+            - Path=/account/**
+            filters:
+            - StripPrefix=1
+          - id: customer-service
+            uri: http://customer:8080
+            predicates:
+            - Path=/customer/**
+            filters:
+            - StripPrefix=1
+          - id: book-service
+            uri: http://book:8080
+            predicates:
+              - Path=/book/**
+            filters:
+              - StripPrefix=1
 
 management:
   endpoints:
